@@ -29,7 +29,7 @@
 ### 1. Клонировать репозиторий
 
 ```bash
-git clone https://github.com/yourname/barter_project_task.git
+git clone https://github.com/Kari230996/barter_project_task.git
 cd barter_project_task
 ```
 
