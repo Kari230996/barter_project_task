@@ -56,7 +56,6 @@ docker compose exec web python manage.py migrate
 * Django 5.x
 * Django REST Framework
 * drf-yasg (Swagger-документация)
-* djoser (регистрация и JWT)
 * SQLite (по умолчанию)
 * Bootstrap 5 (адаптивная верстка)
 
