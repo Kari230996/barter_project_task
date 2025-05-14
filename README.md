@@ -33,18 +33,14 @@ git clone https://github.com/Kari230996/barter_project_task.git
 cd barter_project_task
 ```
 
-### 2. Создать `.env` (опционально)
-
-Не обязателен при использовании SQLite.
-
-### 3. Собрать и запустить Docker-контейнер
+### 2. Собрать и запустить Docker-контейнер
 
 ```bash
 docker compose build
 docker compose up
 ```
 
-### 4. Применить миграции
+### 3. Применить миграции
 
 ```bash
 docker compose exec web python manage.py migrate
