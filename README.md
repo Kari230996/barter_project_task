@@ -50,6 +50,23 @@ docker compose exec web python manage.py migrate
 
 ---
 
+## 🚫 Альтернативный запуск без Docker (необязательно)
+
+1. Создайте виртуальное окружение:
+```bash
+python -m venv venv
+source venv/bin/activate  # или venv\Scripts\activate на Windows
+
+2. Установите зависимости:
+```bash
+pip install -r requirements.txt
+
+3. Выполните миграции и запустите сервер:
+```bash
+python manage.py migrate
+python manage.py runserver
+
+
 ## 🛠 Технологии
 
 * Python 3.10+
