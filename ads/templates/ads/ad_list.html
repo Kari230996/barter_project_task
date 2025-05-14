@@ -1,0 +1,85 @@
+{% extends 'ads/base.html' %}
+{% block title %}Объявления{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Объявления</h2>
+
+<form method="get" class="row g-3 mb-4">
+    <div class="col-md-4">
+        <input type="text" name="q" placeholder="Поиск..." value="{{ request.GET.q }}" class="form-control">
+    </div>
+    <div class="col-md-3">
+        <input type="text" name="category" placeholder="Категория" value="{{ request.GET.category }}"
+            class="form-control">
+    </div>
+    <div class="col-md-3">
+        <select name="condition" class="form-select">
+            <option value="">Состояние</option>
+            <option value="new">Новый</option>
+            <option value="used">Б/у</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">Фильтр</button>
+    </div>
+</form>
+
+{% if user.is_authenticated %}
+<div class="mb-3 d-flex gap-2">
+    <a href="{% url 'ad_create' %}" class="btn btn-success">+ Создать объявление</a>
+    <a href="{% url 'proposal_list' %}" class="btn btn-outline-primary">Мои предложения</a>
+</div>
+{% else %}
+<div class="alert alert-info">Войдите или зарегистрируйтесь, чтобы создавать объявления и обмениваться.</div>
+{% endif %}
+
+<div class="row">
+    {% for ad in ads %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                {% if ad.image_url %}
+                <!-- Увеличение по клику -->
+                <img src="{{ ad.image_url }}" class="img-thumbnail mb-2" style="max-height: 150px; cursor: pointer;"
+                    data-bs-toggle="modal" data-bs-target="#modalImage{{ ad.id }}">
+
+                <!-- Модальное окно с увеличением -->
+                <div class="modal fade" id="modalImage{{ ad.id }}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content bg-transparent border-0">
+                            <div class="modal-body text-center">
+                                <img src="{{ ad.image_url }}" class="img-fluid rounded" alt="Фото объявления">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="bg-light border rounded mb-2 d-flex justify-content-center align-items-center"
+                    style="height: 150px;">
+                    <span class="text-muted">Нет изображения</span>
+                </div>
+                {% endif %}
+
+                <h5 class="card-title">{{ ad.title }}</h5>
+                <p class="card-text">{{ ad.description }}</p>
+                <p class="mb-1"><strong>Категория:</strong> {{ ad.category }}</p>
+                <p class="mb-1"><strong>Состояние:</strong> {{ ad.get_condition_display }}</p>
+                <p class="mb-1"><strong>Автор:</strong> {{ ad.user }}</p>
+            </div>
+            <div class="card-footer bg-white">
+                {% if user.is_authenticated %}
+                {% if ad.user == user %}
+                <a href="{% url 'ad_update' ad.id %}" class="btn btn-sm btn-warning">✏️ Изменить</a>
+                <a href="{% url 'ad_delete' ad.id %}" class="btn btn-sm btn-danger">🗑️ Удалить</a>
+                {% else %}
+                <a href="{% url 'create_proposal' ad.id %}" class="btn btn-sm btn-outline-info">🔁 Предложить обмен</a>
+                {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>Объявлений пока нет.</p>
+    {% endfor %}
+</div>
+{% endblock %}

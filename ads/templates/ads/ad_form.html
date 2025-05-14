@@ -1,0 +1,46 @@
+{% extends 'ads/base.html' %}
+{% load form_tags %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4 d-flex justify-content-center">
+    <div class="card shadow-sm" style="max-width: 600px; width: 100%;">
+        <div class="card-body">
+            <h3 class="card-title text-center mb-4">{{ title }}</h3>
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label class="form-label">Заголовок</label>
+                    {{ form.title|add_class:"form-control" }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Описание</label>
+                    {{ form.description|add_class:"form-control" }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Ссылка на изображение</label>
+                    {{ form.image_url|add_class:"form-control" }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Категория</label>
+                    {{ form.category|add_class:"form-control" }}
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Состояние</label>
+                    {{ form.condition|add_class:"form-select" }}
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary w-100">💾 Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
