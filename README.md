@@ -55,6 +55,11 @@ docker-compose up --build
 docker compose exec web python manage.py migrate
 ```
 
+### 4. Создание суперпользователя
+```bash
+docker-compose exec web python manage.py createsuperuser
+```
+
 Проект будет доступен по адресу: [http://localhost:8000](http://localhost:8000)
 
 ---
