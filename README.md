@@ -1,135 +1,145 @@
-# 📦 Barter Platform — Django REST приложение для обмена товарами
+# 📦 Barter Platform — Django REST Application for Item Exchange
 
-Это веб-приложение на Django, реализующее платформу обмена вещами. Пользователи могут создавать объявления, предлагать обмен, фильтровать предложения, регистрироваться, а также визуально взаимодействовать с сайтом через адаптивный интерфейс.
-
----
-
-## 🚀 Возможности
-
-* Регистрация и авторизация пользователей
-* Создание, редактирование и удаление объявлений
-* Прикрепление изображений через ссылки (URL)
-* Просмотр всех объявлений и фильтрация по:
-
-  * категории
-  * состоянию (новое/б/у)
-  * ключевому слову
-* Обмен предложениями:
-
-  * выбор своего и чужого товара
-  * добавление комментария
-  * отслеживание статуса (ожидает, принята, отклонена)
-* Модальное окно увеличения изображения и описания при клике
-* Адаптивный интерфейс на Bootstrap 5
+This is a Django web application implementing a platform for exchanging goods. Users can create ads, make exchange offers, filter listings, register, and interact visually with the site through a responsive interface.
 
 ---
 
-## ⚙️ Установка проекта локально с Docker
+## 🚀 Features
 
-### 1. Клонировать репозиторий
+* User registration and authentication
+* Create, edit, and delete ads
+* Attach images via URLs
+* Browse all ads and filter by:
+
+  * category
+  * condition (new/used)
+  * keyword
+* Exchange offers:
+
+  * choose your item and another user's item
+  * add a comment
+  * track status (pending, accepted, rejected)
+* Modal window for enlarged image and description
+* Responsive Bootstrap 5 interface
+
+---
+
+## ⚙️ Local Setup with Docker
+
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/Kari230996/barter_project_task.git
 cd barter_project_task
 ```
 
-### 2. Запуск через Docker
-1. Перед запуском переименуйте вручную файл `.env.example` на `.env`
-2. Затем откройте `.env` и замените SECRET_KEY на любой другой:
+### 2. Run with Docker
+
+1. Before starting, rename `.env.example` to `.env`
+2. Open `.env` and replace `SECRET_KEY` with your own:
+
 ```bash
-SECRET_KEY=django-insecure-замените-на-уникальный-ключ
+SECRET_KEY=django-insecure-replace-with-unique-key
 ```
-3. Сгенерировать новый ключ можно командой на Windows:
+
+3. Generate a new key (Windows example):
+
 ```bash
 python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
-
 ```
-4. Запускайте проект командой:
+
+4. Start the project:
+
 ```bash
 docker-compose up --build
 ```
 
-### 3. Применить миграции
+### 3. Apply migrations
 
 ```bash
-docker compose exec web python manage.py migrate
+docker-compose exec web python manage.py migrate
 ```
 
-### 4. Создание суперпользователя
+### 4. Create a superuser
+
 ```bash
 docker-compose exec web python manage.py createsuperuser
 ```
 
-Проект будет доступен по адресу: [http://localhost:8000](http://localhost:8000)
+The project will be available at: [http://localhost:8000](http://localhost:8000)
 
 ---
 
-## 🚫 Альтернативный запуск без Docker (необязательно)
+## 🚫 Alternative Setup without Docker (optional)
 
-1. Создайте виртуальное окружение:
+1. Create a virtual environment:
+
 ```bash
 python -m venv venv
-source venv/bin/activate  # или venv\Scripts\activate на Windows
+source venv/bin/activate  # or venv\Scripts\activate on Windows
 ```
 
-2. Установите зависимости:
+2. Install dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
-3. Выполните миграции и запустите сервер:
+
+3. Run migrations and start the server:
+
 ```bash
 python manage.py migrate
 python manage.py runserver
 ```
 
-## 🛠 Технологии
+---
+
+## 🛠 Technologies
 
 * Python 3.10+
 * Django 5.x
 * Django REST Framework
-* drf-yasg (Swagger-документация)
-* SQLite (по умолчанию)
-* Bootstrap 5 (адаптивная верстка)
+* drf-yasg (Swagger documentation)
+* SQLite (default)
+* Bootstrap 5 (responsive design)
 
 ---
 
-## 🧪 Тестирование
+## 🧪 Testing
 
 ### 📁 Pytest + Django: `tests/test_ads.py`
 
-Запуск всех тестов:
+Run all tests:
 
 ```bash
 pytest
 ```
 
-Тесты покрывают:
+Tests cover:
 
-* Создание объявления
-* Редактирование объявления
-* Удаление объявления
-* Поиск по ключевому слову
-* Создание предложения обмена
+* Creating an ad
+* Editing an ad
+* Deleting an ad
+* Keyword search
+* Creating an exchange offer
 
 ---
 
-## 🧾 Документация API
+## 🧾 API Documentation
 
-Автоматическая Swagger-документация доступна по адресу:
+Automatic Swagger documentation available at:
 
 [http://localhost:8000/swagger/](http://localhost:8000/swagger/)
 
-⚠️ Все эндпоинты API начинаются с префикса `/api/`.  
-Пример запроса: `GET http://localhost:8000/api/ads/`
-
-## ✨ Автор
-
-Разработано в рамках тестового задания. Визуальный акцент — простота, чистота и удобство.
+⚠️ All API endpoints are prefixed with `/api/`.
+Example request: `GET http://localhost:8000/api/ads/`
 
 ---
 
-**📧 Связь:** \karina.apaeva96@gmail.com
+## ✨ Author
+
+Developed as part of a test assignment. Visual emphasis — simplicity, clarity, and usability.
+
+**📧 Contact:** [karina.apaeva96@gmail.com](mailto:karina.apaeva96@gmail.com)
 
 ---
-
-
